@@ -1,0 +1,85 @@
+# Project
+# .*ignore
+# .*rc*
+# .editorconfig
+# *.config.*
+# tsconfig*.json
+
+# Node
+node_modules/
+# .tool-versions
+# *-lock.*
+# *.lock
+
+# Logs
+log?/
+*.log
+
+# Builds
+build/
+dist/
+lib/
+out/
+*.aab
+*.apk
+*.dll
+*.exe
+*.gz
+*.ipa
+*.tar
+*.tgz
+*.zip
+
+# Environments
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# IDE
+.history/
+# .vscode/
+
+# Git
+# .git/
+# .github/
+# .gitattributes
+# .gitignore
+# .gitmodules
+
+# Docker
+# docker-compose.y*ml
+# compose.y*ml
+
+# Expo
+.expo/
+expo-env.d.ts
+
+# Next
+.next/
+next-env.d.ts
+
+# Ignore
+backup?/
+bak?/
+dump?/
+temp/
+*.bak.*
+*.old.*
+
+# Tests
+# __test?__/
+coverage/
+# example?/
+# script?/
+# spec?/
+# test?/
+# *.spec.*
+# *.test.*
+
+# OS
+.DS_Store
+%ProgramData%/
+desktop.ini
+thumbs.db
