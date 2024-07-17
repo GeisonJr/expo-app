@@ -1,24 +1,26 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AnimatableNumericValue, Pressable } from 'react-native'
 
-import { Link } from '..'
+import { IconName } from '../Icon'
+import { Link, LinkProps } from '../Link'
 
-type Icon = React.ComponentProps<typeof MaterialCommunityIcons>['name']
+export type HeaderIconProps = {
+	icon: IconName
+	pressColor?: string
+	tintColor?: string
+	pressOpacity?: AnimatableNumericValue
+} & LinkProps
 
 export function HeaderIcon({
 	icon,
 	pressColor,
 	tintColor,
 	pressOpacity,
-}: {
-	icon: Icon
-	pressColor?: string
-	tintColor?: string
-	pressOpacity?: AnimatableNumericValue
-}) {
+	...linkProps
+}: HeaderIconProps) {
 	return (
 		<Link
-			href={'/modal'}
+			{...linkProps}
 			asChild
 		>
 			<Pressable>

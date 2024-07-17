@@ -1,16 +1,19 @@
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { Stack } from 'expo-router'
+
 import { useScreenOptions } from '../Themed'
+
+export interface HeaderProps {
+	isHidden?: boolean
+	title: string
+	right?: NativeStackNavigationOptions['headerRight']
+}
 
 export function Header({
 	isHidden,
 	title,
 	right,
-}: {
-	isHidden?: boolean
-	title: string
-	right?: NativeStackNavigationOptions['headerRight']
-}) {
+}: HeaderProps) {
 	const { stack } = useScreenOptions()
 
 	return (

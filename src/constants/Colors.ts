@@ -13,6 +13,7 @@ export default {
 		text: '#000',
 		background: '#fff',
 		tint: '#2f95dc',
+		aaa: 'red',
 		notification: 'rgb(255, 59, 48)',
 		tabBarPrimary: 'rgb(0, 122, 255)',
 		tabBarBackground: 'rgb(242, 242, 242)',

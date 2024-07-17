@@ -2,14 +2,14 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { isArray } from '@geisonjr/typefy'
 import React from 'react'
 
-type Icon = React.ComponentProps<typeof MaterialCommunityIcons>['name']
+import { IconName } from '../Icon'
 
 export function TabBarIcon({
 	focused,
 	icon,
 	...props
 }: {
-	icon: Icon | [Icon, Icon]
+	icon: IconName | [IconName, IconName]
 	color: React.ComponentProps<typeof MaterialCommunityIcons>['color']
 	focused: boolean
 	size: number

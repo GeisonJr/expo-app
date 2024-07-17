@@ -1,14 +1,18 @@
 import { StyleSheet } from 'react-native'
 
-import { Header, Separator, Text, View } from '@/components'
+import { Header, Link, Separator, Text, View } from '@/components'
 
-export default function ModalScreen() {
+export default function AuthSignupScreen() {
 	return (
 		<>
-			<Header title={'Menu - Modal'} />
+			<Header
+				title={'Menu - Signup'}
+				isHidden
+			/>
 			<View style={styles.container}>
-				<Text style={styles.title}>{'Modal'}</Text>
+				<Text style={styles.title}>{'Signup'}</Text>
 				<Separator />
+				<Link href={'/(signin)'}>{'Signin'}</Link>
 			</View>
 		</>
 	)

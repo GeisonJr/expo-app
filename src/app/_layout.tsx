@@ -1,12 +1,12 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
-import { StyleSheet } from 'react-native'
 import 'react-native-reanimated'
 
-import { ActivityIndicator, Text, useScreenOptions, View } from '@/components'
+import { useScreenOptions } from '@/components'
+import { LoadingProvider } from '@/contexts'
+import { Stack } from 'expo-router'
 
 // Catch any errors thrown by the Layout component.
 export { ErrorBoundary } from 'expo-router'
@@ -15,6 +15,7 @@ export { ErrorBoundary } from 'expo-router'
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
+	// Load fonts and icons before rendering the app.
 	const [loaded, error] = useFonts({
 		SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
 		...MaterialCommunityIcons.font,
@@ -25,17 +26,18 @@ export default function RootLayout() {
 		if (error) throw error
 	}, [error])
 
+	// Hide the splash screen when the app is ready to be displayed.
 	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync()
-		}
+		if (loaded) SplashScreen.hideAsync()
 	}, [loaded])
 
-	if (!loaded) {
-		return <RootLayoutLoading />
-	}
+	if (!loaded) return null
 
-	return <RootLayoutStack />
+	return (
+		<LoadingProvider>
+			<RootLayoutStack />
+		</LoadingProvider>
+	)
 }
 
 function RootLayoutStack() {
@@ -47,33 +49,6 @@ function RootLayoutStack() {
 				...stack,
 				headerShown: false,
 			}}
-		>
-			<Stack.Screen name={'(tabs)'} />
-			<Stack.Screen
-				name={'modal'}
-				options={{
-					headerShown: true,
-					presentation: 'modal',
-				}}
-			/>
-		</Stack>
+		/>
 	)
 }
-
-function RootLayoutLoading() {
-	return (
-		<View style={styles.container}>
-			<ActivityIndicator />
-			<Text>{'Loading data, wait a minute...'}</Text>
-		</View>
-	)
-}
-
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		flex: 1,
-		gap: 10,
-		justifyContent: 'center',
-	},
-})

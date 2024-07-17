@@ -9,6 +9,7 @@ export default function TabsNavigateScreen() {
 				title={'Menu - Navigate'}
 				right={(props) => (
 					<HeaderIcon
+						href={'/modal'}
 						icon={'information'}
 						{...props}
 					/>

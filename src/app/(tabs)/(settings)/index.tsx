@@ -1,18 +1,19 @@
 import { StyleSheet } from 'react-native'
 
-import { Header, HeaderIcon, Separator, Text, View } from '@/components'
+import { Header, Separator, Text, View } from '@/components'
 
 export default function TabsSettingsScreen() {
 	return (
 		<>
 			<Header
 				title={'Menu Setting'}
-				right={(props) => (
-					<HeaderIcon
-						icon={'information'}
-						{...props}
-					/>
-				)}
+			// right={(props) => (
+			// 	<HeaderIcon
+			// 		href={'/modal'}
+			// 		icon={'information'}
+			// 		{...props}
+			// 	/>
+			// )}
 			/>
 			<View style={styles.container}>
 				<Text style={styles.title}>{'Settings'}</Text>
