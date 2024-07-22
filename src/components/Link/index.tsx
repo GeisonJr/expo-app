@@ -5,20 +5,24 @@ import { Platform } from 'react-native'
 import { ExpoRouter } from '../../../.expo/types/router'
 import { ThemeProps, useThemeColor } from '../Themed'
 
-export type LinkProps = ThemeProps & ExpoRouter.LinkProps &
-{
+export interface LinkProps extends ThemeProps, ExpoRouter.LinkProps {
   isExternal?: boolean
   // href: string
 }
 
 export function Link(props: LinkProps) {
-  const { colorDark, colorLight, isExternal, style, ...rest } = props
+  const { colorDark, colorLight, isExternal, ...rest } = props
   const color = useThemeColor({ dark: colorDark, light: colorLight }, 'text')
 
   return (
     <NativeLink
       {...rest}
-      style={[{ color }, style]}
+      style={[
+        {
+          color
+        },
+        props.style
+      ]}
       onPress={(e) => {
         if (!isExternal)
           return rest.onPress?.(e)

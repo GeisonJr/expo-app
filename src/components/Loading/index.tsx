@@ -3,9 +3,13 @@ import React from 'react'
 import { ActivityIndicator } from '../ActivityIndicator'
 import { Overlay } from '../Overlay'
 
-export function Loading({ isLoading }: { isLoading: boolean }) {
+export interface LoadingProps {
+  isLoading: boolean
+}
 
-  if (!isLoading)
+export function Loading(props: LoadingProps) {
+
+  if (!props.isLoading)
     return null
 
   return (

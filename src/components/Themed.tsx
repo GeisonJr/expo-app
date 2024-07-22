@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import Colors from '@/constants/Colors'
+import { isUndefined } from '@geisonjr/typefy'
 
 export interface ThemeProps {
 	colorLight?: string
@@ -55,15 +56,21 @@ export function useScreenOptions() {
 }
 
 export function useThemeColor(
-	props: { light?: string; dark?: string },
+	props: {
+		color?: string
+		light?: string
+		dark?: string
+	},
 	colorName: keyof typeof Colors.light & keyof typeof Colors.dark,
 ) {
+	if (!isUndefined(props.color))
+		return props.color
+
 	const { scheme, colors } = useTheme()
 	const colorFromProps = props[scheme]
 
-	if (colorFromProps) {
+	if (colorFromProps)
 		return colorFromProps
-	} else {
-		return colors[colorName]
-	}
+
+	return colors[colorName]
 }

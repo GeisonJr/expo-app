@@ -1,21 +1,24 @@
 import { StyleSheet } from 'react-native'
 
+import { ThemeProps } from '../Themed'
 import { View, ViewProps } from '../View'
 
-export type OverlayProps = ViewProps & {
-
+export interface OverlayProps extends ThemeProps, ViewProps {
+  //...
 }
 
 export function Overlay(props: OverlayProps) {
-  const { children, ...rest } = props
+  props.colorDark = props.colorDark ?? 'rgba(0, 0, 0, 0.75)'
+  props.colorLight = props.colorLight ?? 'rgba(255, 255, 255, 0.75)'
 
   return (
     <View
-      colorDark={'rgba(0, 0, 0, 0.75)'}
-      colorLight={'rgba(255, 255, 255, 0.75)'}
-      style={styles.container} {...rest}>
-      {children}
-    </View>
+      {...props}
+      style={[
+        styles.container,
+        props.style
+      ]}
+    />
   )
 }
 

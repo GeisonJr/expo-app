@@ -1,11 +1,10 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
 
-import { useScreenOptions } from '@/components'
-import { LoadingProvider } from '@/contexts'
+import { Icon, useScreenOptions } from '@/components'
+import { LoadingProvider } from '@/contexts/useLoading'
 import { Stack } from 'expo-router'
 
 // Catch any errors thrown by the Layout component.
@@ -18,7 +17,7 @@ export default function RootLayout() {
 	// Load fonts and icons before rendering the app.
 	const [loaded, error] = useFonts({
 		SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
-		...MaterialCommunityIcons.font,
+		...Icon.font,
 	})
 
 	// Expo Router uses Error Boundaries to catch errors in the navigation tree.

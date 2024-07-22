@@ -1,10 +1,7 @@
 import { StyleSheet } from 'react-native'
 
-import { Button, Header, Link, Separator, Text, TextInput, View } from '@/components'
-import { FormProvider, useForm } from '@/contexts'
-import { alert } from '@/functions'
-import { router } from 'expo-router'
-import { useEffect } from 'react'
+import { BRValueTextInput, Button, CNPJTextInput, CPFTextInput, Header, Link, Separator, Text, TextInput, View } from '@/components'
+import { FormProvider, useForm } from '@/contexts/useForm'
 
 export default function AuthSigninScreen() {
 
@@ -17,51 +14,79 @@ export default function AuthSigninScreen() {
 			<FormProvider>
 				<View style={styles.container}>
 					<Fields />
-				</View >
-			</FormProvider>
+				</View>
+			</FormProvider >
 		</>
 	)
 }
 
 function Fields() {
-	const { fields } = useForm()
+	const form = useForm()
 
 	async function onSubmit() {
-		for (const field of fields)
-			if (!field.valid()) {
-				alert({
-					title: `Required field`,
-					message: `The field "${field.placeholder}" is required`
-				})
-				return field.focus()
-			}
+		for (const field of form.fields)
+			console.log(field.value, field.display)
+
+		// for (const field of form.fields)
+		// 	if (!field.valid()) {
+		// 		if (field.props.required)
+		// 			alert({
+		// 				title: `Required field`,
+		// 				message: `The field "${field.name}" is required`
+		// 			})
+		// 		else
+		// 			alert({
+		// 				title: `Invalid field`,
+		// 				message: `The field "${field.name}" is invalid`
+		// 			})
+
+		// 		return field.focus()
+		// 	}
 
 		// TODO: Signin
 		// const response = await fetch('...')
 
-		router.replace('/(tabs)')
+		// router.replace('/(tabs)')
 	}
-
-	useEffect(() => {
-		console.log(fields)
-
-	}, [fields])
 
 	return (
 		<>
 			<Text style={styles.title}>{'Signin'}</Text>
 			<TextInput
-				name={'username'}
-				placeholder={'Username'}
-				next={'password'}
+				id={'username'}
+				name={'Username'}
+				nextFieldId={'password'}
+				onDisplay={(display) => {
+					return display
+				}}
+				onValue={(value) => {
+					return value
+				}}
+				onChangeText={(value, {
+					setDisplay, setValue
+				}) => {
+					setDisplay(value.toUpperCase())
+					setValue(value.toLowerCase())
+				}}
 				required
+				defaultDisplay={'aasfafasfas'}
 			/>
 			<TextInput
-				name={'password'}
-				placeholder={'Password'}
-				required
-				// multiline
+				id={'password'}
+				name={'Password'}
 				secureTextEntry
+			/>
+			<CPFTextInput
+				id={'cpf'}
+				name={'CPF'}
+			/>
+			<CNPJTextInput
+				id={'cnpj'}
+				name={'CNPJ'}
+			/>
+			<BRValueTextInput
+				id={'brvalue'}
+				name={'Value'}
 			/>
 			<Separator />
 			<Button

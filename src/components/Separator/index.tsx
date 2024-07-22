@@ -1,11 +1,16 @@
 import { ThemeProps, useThemeColor } from '../Themed'
 import { View, ViewProps } from '../View'
 
-export type SeparatorProps = ThemeProps & ViewProps
+export interface SeparatorProps extends ThemeProps, ViewProps {
+  //...
+}
 
 export function Separator(props: SeparatorProps) {
-  const { colorDark = 'rgba(255, 255, 255, .15)', colorLight = 'rgba(0, 0, 0, .15)', style, ...rest } = props
-  const color = useThemeColor({ dark: colorDark, light: colorLight }, 'text')
+  const { colorDark, colorLight, ...rest } = props
+  const color = useThemeColor({
+    dark: colorDark ?? 'rgba(255, 255, 255, .15)',
+    light: colorLight ?? 'rgba(0, 0, 0, .15)'
+  }, 'text')
 
   return (
     <View
@@ -17,7 +22,7 @@ export function Separator(props: SeparatorProps) {
           marginVertical: 8,
           width: '80%'
         },
-        style,
+        rest.style
       ]}
     />
   )

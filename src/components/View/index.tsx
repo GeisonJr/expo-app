@@ -1,22 +1,30 @@
 import {
-  View as NativeView
+  View as NativeView,
+  ViewProps as NativeViewProps
 } from 'react-native'
 
 import { ThemeProps, useThemeColor } from '../Themed'
 
-export type ViewProps = ThemeProps & NativeView['props']
+export interface ViewProps extends ThemeProps, NativeViewProps {
+  //...
+}
 
 export function View(props: ViewProps) {
-  const { colorDark, colorLight, style, ...rest } = props
-  const backgroundColor = useThemeColor(
-    { dark: colorDark, light: colorLight },
-    'background',
-  )
+  const { colorDark, colorLight, ...rest } = props
+  const color = useThemeColor({
+    dark: colorDark,
+    light: colorLight
+  }, 'background')
 
   return (
     <NativeView
       {...rest}
-      style={[{ backgroundColor }, style]}
+      style={[
+        {
+          backgroundColor: color
+        },
+        rest.style
+      ]}
     />
   )
 }

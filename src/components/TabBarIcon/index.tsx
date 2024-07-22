@@ -1,25 +1,24 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { isArray } from '@geisonjr/typefy'
 import React from 'react'
 
-import { IconName } from '../Icon'
+import { Icon, IconProps } from '../Icon'
 
-export function TabBarIcon({
-	focused,
-	icon,
-	...props
-}: {
-	icon: IconName | [IconName, IconName]
-	color: React.ComponentProps<typeof MaterialCommunityIcons>['color']
+export interface TabsBarIconProps {
+	icon: IconProps['name'] | [IconProps['name'], IconProps['name']]
+	color: IconProps['color']
 	focused: boolean
 	size: number
-}) {
+}
+
+export function TabsBarIcon(props: TabsBarIconProps) {
+	const { focused, icon, ...rest } = props
+
 	const name = !isArray(icon) ? icon : focused ? icon[0] : icon[1]
 
 	return (
-		<MaterialCommunityIcons
+		<Icon
+			{...rest}
 			name={name}
-			{...props}
 		/>
 	)
 }

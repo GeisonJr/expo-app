@@ -9,11 +9,9 @@ export interface HeaderProps {
 	right?: NativeStackNavigationOptions['headerRight']
 }
 
-export function Header({
-	isHidden,
-	title,
-	right,
-}: HeaderProps) {
+export function Header(props: HeaderProps) {
+	const { isHidden, title, right, } = props
+
 	const { stack } = useScreenOptions()
 
 	return (
